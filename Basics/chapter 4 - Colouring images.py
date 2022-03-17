@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = np.zeros((512, 512, 3), np.uint8) # Creates a matrix, 64, 64 all black (0) ", 3" to be BGR, not RGB
+img = np.zeros((512, 512, 3), np.uint8) # Creates a matrix, 512 x 512 all black (0) ", 3" to be BGR, not RGB
 print(img.shape)
 
 img[:] = 255, 0, 0 # Colouring the full image
