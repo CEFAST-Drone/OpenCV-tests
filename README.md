@@ -10,6 +10,8 @@ Repository focused in the study of opencv and the way to use it to our drone, an
 - 5 -> Warp Perspective (planification)
 - 6 -> Joining images
 - 7 -> Color detection and Trackbars
+- 8 -> Object detection
+- 9 -> Face recoginizition
 
 ### References
 - Video of the basics: https://www.youtube.com/watch?v=WQeoO7MI0Bs
