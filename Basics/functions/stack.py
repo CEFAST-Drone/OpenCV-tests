@@ -19,7 +19,12 @@ def concat_tile_resize(im_list_2d, interpolation=cv2.INTER_CUBIC):
     im_list_v = [hconcat_resize_min(im_list_h, interpolation=cv2.INTER_CUBIC) for im_list_h in im_list_2d]
     return vconcat_resize_min(im_list_v, interpolation=cv2.INTER_CUBIC)
 
+def join(imagesList_2d):
+    return concat_tile_resize(imagesList_2d)
+
 # To use: 
 # from functions import stack
-# StackImg = stack.concat_tile_resize([[img],
-#                                       [img, img]])    
+# StackImg = stack.join([[img],
+#                        [img, img]])    
+
+# Reference: https://github.com/nkmk/python-snippets/blob/e5d988b84b04acfbfd15105546c93c2465f2d126/notebook/opencv_hconcat_vconcat_np_tile.py#L57-L64
