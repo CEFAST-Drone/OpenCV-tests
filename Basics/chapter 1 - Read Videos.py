@@ -1,3 +1,5 @@
+import cv2
+
 #                                  Video Read
 
 cap = cv2.VideoCapture("./test-resources/boys.mp4") # Reading the video (PATH), it's a sequence of images/frames
