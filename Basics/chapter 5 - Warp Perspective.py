@@ -5,7 +5,7 @@ img = cv2.imread("test-resources\street.jpg")
 
 # Letting the "levis" advertise plan and easy to read
 width, height = 200, 200 # sizes of the outdoor
-point1 = np.float32([[61,0],[100,22],[61,95],[100,108]]) # Position of the outdoor (the 4 points of it)
+point1 = np.float32([[61,0],[100,22],[61,95],[100,108]]) # Position of the outdoor (the 4 points of it), (x, y), (x+width, y) ...
 point2 = np.float32([[0,0],[width, 0],[0, height],[width, height]]) # New sizes
 matrix = cv2.getPerspectiveTransform(point1, point2) # Make it plan
 
