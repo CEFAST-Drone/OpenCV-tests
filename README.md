@@ -15,7 +15,7 @@ Repository focused in the study of opencv and the way to use it to our drone, an
 
 ### Cool Things
 - Bases detection (Petrobras-CBR 2022) - getting position and marking them
-<img align=center alt="Desafio 1" src="">
+<img align=center width="500" alt="Desafio 1" src="https://user-images.githubusercontent.com/62257920/160283647-2fe734b0-3973-4644-a948-1f9390234700.png">
 
 ### References
 - Video of the basics: https://www.youtube.com/watch?v=WQeoO7MI0Bs
