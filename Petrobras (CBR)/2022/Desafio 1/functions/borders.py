@@ -44,6 +44,7 @@ def ContourDetection(img, originalImg):
     # (image, mode, method), mode have a lot of options, method it's the way you want the return data to be.
 
     imgContour = originalImg.copy() # Save the results
+    positions = [] # Each will be ('type', x, y) positions of the center
 
     areas = []
     for count in contours:
@@ -74,6 +75,12 @@ def ContourDetection(img, originalImg):
             if area == max(areas) : objectType = "Base costeira" 
             else: objectType = "Base terrestre"
             #else: objectType = "?"
-            cv2.putText(imgContour, objectType, (x, y), cv2.FONT_HERSHEY_COMPLEX, 0.3, (0,0,0))
+
+            #realPositionX = ((x+w)/2)
+
+            positions.append((objectType, x+w/2, y+h/2))
+            cv2.circle(imgContour, (int(x+w/2), int(y+h/2)), 5, (0, 0, 255), 5)
+
+            cv2.putText(imgContour, objectType, (x, y), cv2.FONT_HERSHEY_COMPLEX, 0.75, (0,0,0))
     
-    return imgContour
+    return imgContour, positions

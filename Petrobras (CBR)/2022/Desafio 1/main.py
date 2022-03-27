@@ -12,18 +12,20 @@ img = cv2.resize(img, (800, 800))
 # Filters to improve
 imgFiltered = filters.getContoursFilter(img)
 
-# Planificando imagem
+# "Planificando"/Wrapping image
 
 planImage = borders.arenaContourDetection(imgFiltered, img)
-planImage = cv2.resize(planImage, (400, 400)) # Melhor visualização
 planImageFiltered = filters.getContoursFilter(planImage)
 
-# Detecção da base costeira e terrestres
+# Detectin of "base costeira e bases terrestres"
 
-detectedImage = borders.ContourDetection(planImageFiltered, planImage) 
-# ?????? Falta conseguir pegar as posições das formas encontradas
+detectedImage, positions = borders.ContourDetection(planImageFiltered, planImage) 
+detectedImage = cv2.resize(detectedImage, (400, 400)) # Better view
 
-# Printando na tela resultados
+for pos in positions: # Position of the center (type, x, y) # x and y are in centimeters(cm)
+    print(pos)
+
+# Results show
 
 resultImg = stack.join([
         [img, detectedImage]
