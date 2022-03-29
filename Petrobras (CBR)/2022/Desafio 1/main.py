@@ -32,6 +32,8 @@ resultImg = stack.join([
     ])
 
 cv2.imshow("Analise", resultImg)
+#planImageFiltered = cv2.resize(planImageFiltered, (400, 400))
+#cv2.imshow("Filtered Image", planImageFiltered)
 
 
 cv2.waitKey(0)

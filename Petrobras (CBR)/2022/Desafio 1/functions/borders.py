@@ -34,7 +34,7 @@ def arenaContourDetection(img, originalImg):
 
     planImage = cv2.warpPerspective(originalImg, matrix, (width, height)) # Turn it into an image
 
-    cv2.rectangle(planImage, (0, 0), (800, 800), (0, 0, 0), 5) # Borders draw
+    cv2.rectangle(planImage, (0, 0), (800, 800), (255, 255, 255), 20) # Borders draw
     
     return planImage
 
@@ -47,19 +47,12 @@ def ContourDetection(img, originalImg):
     positions = [] # Each will be ('type', x, y) positions of the center
 
     areas = []
+    info = []
     for count in contours:
         area = cv2.contourArea(count)
         if area > 50:
             areas.append(area)
-    
-    if len(areas) != 6: # Erro
-        print('Error')
-        return -1
 
-    for count in contours:
-        area = cv2.contourArea(count)
-        #print(area)
-        if area > 50: # Avoid errors
             #cv2.drawContours(imgContour, count, -1, (0, 255, 0), 3) 
             # (img to put contour, border, -1 is to display all of the contour, color of the border, thickness)
             perimeter = cv2.arcLength(count, True) # (border, True)
@@ -71,16 +64,29 @@ def ContourDetection(img, originalImg):
             cv2.rectangle(imgContour, (x, y), (x + w, y + h), (255, 255, 0), 2)
             # We can save that information to calculate the object's position
 
-            # Putting the name of the object in it
-            if area == max(areas) : objectType = "Base costeira" 
-            else: objectType = "Base terrestre"
-            #else: objectType = "?"
-
-            #realPositionX = ((x+w)/2)
-
-            positions.append((objectType, x+w/2, y+h/2))
             cv2.circle(imgContour, (int(x+w/2), int(y+h/2)), 5, (0, 0, 255), 5)
 
-            cv2.putText(imgContour, objectType, (x, y), cv2.FONT_HERSHEY_COMPLEX, 0.75, (0,0,0))
+            info.append([perimeter, vertices, x, y, w, h])
+
+    
+    #if len(areas) != 7: # Erro, não encontrou as 5 bases terrestres, 1 base costeria e o 1 "gasoduto"
+    #    print(f'Error\nHá {len(areas)} formas geométricas detectadas')
+    #    return -1
+
+    areas.sort(reverse=True) # do maior para o menor
+
+    for index, count in enumerate(contours):
+        area = cv2.contourArea(count)
+        #print(area)
+        if area > 50: # Avoid errors
+            # Putting the name of the object in it
+            if area == areas[0]: objectType = "Base Costeira" 
+            elif area == areas[1]: objectType = "Gasoduto"
+            else: objectType = "Base Terrestre"
+            #else: objectType = "?"
+
+            positions.append((objectType, info[index][2]+ info[index][4]/2, info[index][3]+info[index][5]/2))
+
+            cv2.putText(imgContour, objectType, (info[index][2], info[index][3]+5), cv2.FONT_HERSHEY_COMPLEX, 0.75, (0,0,0))
     
     return imgContour, positions
