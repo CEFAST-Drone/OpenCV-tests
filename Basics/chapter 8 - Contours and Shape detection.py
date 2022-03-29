@@ -17,7 +17,14 @@ def ContourDetection(img, originalImg):
             # (img to put contour, border, -1 is to display all of the contour, color of the border, thickness)
             perimeter = cv2.arcLength(count, True) # (border, True)
             print(perimeter)
-            approx = cv2.approxPolyDP(count, 0.02*perimeter, True) # (border, I don't know, True)
+            approx = cv2.approxPolyDP(count, 0.02*perimeter, True) # (border, I don't know, True) Borders of the shape
+            """ Each border can be used in this way [x, y], but you must remember that the borders can be in a different order than you expect
+            border1 = [approx[0][0][0], approx[0][0][1]]
+            border2 = [approx[1][0][0], approx[1][0][1]]
+            border3 = [approx[2][0][0], approx[2][0][1]]
+            border4 = [approx[3][0][0], approx[3][0][1]]
+            Border 1 can be the upper left, 2 can be lower left or .... So don't believe too much on these
+            """
             vertices = len(approx)
             print(vertices)
             x, y, w, h = cv2.boundingRect(approx) # Get the position of the Object, with x, y, width and height

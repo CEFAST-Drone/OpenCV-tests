@@ -11,24 +11,29 @@ def arenaContourDetection(img, originalImg):
         area = cv2.contourArea(count)
         areas.append(area)
         
-    if max(areas) < 320000: # Only bigger than (800x800/2), returning error if not
-        print('Error')
-        return -1
+    #if max(areas) < 320000: # Only bigger than (800x800/2), returning error if not
+    #    print('Error')
+    #    return -1
     
     #print(max(areas))
 
     arenaBorder = contours[areas.index(max(areas))] # Getting the bigger area
+    #cv2.drawContours(originalImg, arenaBorder, -1, (0, 255, 0), 3) 
     
     perimeter = cv2.arcLength(arenaBorder, True) # (border, True)
     #print(perimeter)
     approx = cv2.approxPolyDP(arenaBorder, 0.02*perimeter, True) # (border, I don't know, True)
     vertices = len(approx)
-    #print(vertices)
+    border1 = [approx[0][0][0], approx[0][0][1]]
+    border2 = [approx[1][0][0], approx[1][0][1]]
+    border3 = [approx[2][0][0], approx[2][0][1]]
+    border4 = [approx[3][0][0], approx[3][0][1]]
     x, y, w, h = cv2.boundingRect(approx) # Get the position of the Object, with x, y, width and height
+    # ?????????????????????? Erro
 
     # Planificando imagem e cortando apenas para o terreno
     width, height = 800, 800 # tamanhos da arena
-    point1 = np.float32([[x,y],[x+w,y],[x,y+h],[x+w,y+h]]) # Position of the outdoor (the 4 points of it)
+    point1 = np.float32([border1,border4,border2,border3])
     point2 = np.float32([[0,0],[width, 0],[0, height],[width, height]]) # New sizes
     matrix = cv2.getPerspectiveTransform(point1, point2) # Make it plan
 

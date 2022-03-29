@@ -4,10 +4,10 @@ from functions import stack
 from functions import filters
 from functions import borders
 
-path = 'test-resources/arena.png'
+path = 'test-resources/arenaTorta2.png'
 img = cv2.imread(path) # Getting Image
 
-img = cv2.resize(img, (800, 800))
+#img = cv2.resize(img, (800, 800))
 
 # Filters to improve
 imgFiltered = filters.getContoursFilter(img)
@@ -33,7 +33,7 @@ resultImg = stack.join([
 
 cv2.imshow("Analise", resultImg)
 #planImageFiltered = cv2.resize(planImageFiltered, (400, 400))
-#cv2.imshow("Filtered Image", planImageFiltered)
+cv2.imshow("Filtered Image", planImage)
 
 
 cv2.waitKey(0)
